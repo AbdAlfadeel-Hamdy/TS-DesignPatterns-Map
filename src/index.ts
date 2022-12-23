@@ -1,2 +1,1 @@
-console.log("Hi there");
-console.log("Test");
+import { User } from "./User";
