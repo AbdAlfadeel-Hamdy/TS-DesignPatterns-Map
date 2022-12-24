@@ -14,7 +14,15 @@ export interface Mappable {
 export class Map {
   private map: leaflet.Map;
   constructor(divId: string) {
-    this.map = leaflet.map(divId).setView([0, 0], 0);
+    this.map = leaflet
+      .map(divId, {
+        center: {
+          lat: 0,
+          lng: 0,
+        },
+        closePopupOnClick: false,
+      })
+      .setView([0, 0], 3);
     leaflet
       .tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -27,7 +35,9 @@ export class Map {
     const marker = leaflet
       .marker([mappable.location.lat, mappable.location.lng])
       .addTo(this.map);
-    marker.bindPopup(mappable.markerContent());
+    marker.bindPopup(mappable.markerContent(), {
+      autoClose: false,
+    });
   }
   // addMarker(markerType: User | Company) {
   //   leaflet
