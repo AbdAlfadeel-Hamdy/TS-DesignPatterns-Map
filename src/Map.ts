@@ -1,12 +1,16 @@
 import leaflet from "leaflet";
 // import { Company } from "./Company";
 // import { User } from "./User";
+
+// Instructions for any class on how it can be an arguement to 'addMarker'
 interface Mappable {
   location: {
     lat: number;
     lng: number;
   };
+  markerContent(): string;
 }
+
 export class Map {
   private map: leaflet.Map;
   constructor(divId: string) {
@@ -20,9 +24,10 @@ export class Map {
       .addTo(this.map);
   }
   addMarker(mappable: Mappable) {
-    leaflet
+    const marker = leaflet
       .marker([mappable.location.lat, mappable.location.lng])
       .addTo(this.map);
+    marker.bindPopup(mappable.markerContent());
   }
   // addMarker(markerType: User | Company) {
   //   leaflet
