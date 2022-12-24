@@ -1,6 +1,14 @@
 import leaflet from "leaflet";
+// import { Company } from "./Company";
+// import { User } from "./User";
+interface Mappable {
+  location: {
+    lat: number;
+    lng: number;
+  };
+}
 export class Map {
-  map: leaflet.Map;
+  private map: leaflet.Map;
   constructor(divId: string) {
     this.map = leaflet.map(divId).setView([0, 0], 0);
     leaflet
@@ -11,4 +19,22 @@ export class Map {
       })
       .addTo(this.map);
   }
+  addMarker(mappable: Mappable) {
+    leaflet
+      .marker([mappable.location.lat, mappable.location.lng])
+      .addTo(this.map);
+  }
+  // addMarker(markerType: User | Company) {
+  //   leaflet
+  //     .marker([markerType.location.lat, markerType.location.lng])
+  //     .addTo(this.map);
+  // }
+  // addUserMarker(user: User) {
+  //   leaflet.marker([user.location.lat, user.location.lng]).addTo(this.map);
+  // }
+  // addCompanyMarker(company: Company) {
+  //   leaflet
+  //     .marker([company.location.lat, company.location.lng])
+  //     .addTo(this.map);
+  // }
 }
