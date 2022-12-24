@@ -3,7 +3,7 @@ import leaflet from "leaflet";
 // import { User } from "./User";
 
 // Instructions for any class on how it can be an arguement to 'addMarker'
-interface Mappable {
+export interface Mappable {
   location: {
     lat: number;
     lng: number;
